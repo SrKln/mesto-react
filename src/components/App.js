@@ -25,6 +25,11 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsPopupPictureOpen(true);
+  };
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -32,12 +37,7 @@ function App() {
     setIsPopupPictureOpen(false);
   };
 
-  function handleCardClick(card) {
-    setSelectedCard(card);
-    setIsPopupPictureOpen(true);
-  };
-
-  const isOpen = isEditProfilePopupOpen || isEditAvatarPopupOpen || isAddPlacePopupOpen || isPopupPictureOpen;
+  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isPopupPictureOpen;
 
 
   React.useEffect(() => {
@@ -78,9 +78,12 @@ function App() {
         buttonText={'Сохранить'}
       >
         <input type="text" className="popup__input popup__input_profile_title" id="profile-title-input" name="name" placeholder="Введите Имя" minLength={2} maxLength={40} required />
+
+
         <span className="popup__input-error profile-title-input-error" />
         <input type="text" className="popup__input popup__input_profile_subtitle" id="profile-subtitle-input" name="about" placeholder="Добавьте пояснение" minLength={2} maxLength={200} required />
         <span className="popup__input-error profile-subtitle-input-error" />
+
       </PopupWithForm>
 
       <PopupWithForm
@@ -95,6 +98,7 @@ function App() {
         <span className="popup__input-error element-title-input-error" />
         <input type="url" className="popup__input popup__input_element-image" id="element-image-input" name="link" placeholder="Ссылка на картинку" required />
         <span className="popup__input-error element-image-input-error" />
+
       </PopupWithForm>
 
       <PopupWithForm
@@ -107,6 +111,7 @@ function App() {
       >
         <input className="popup__input popup__input_avatar" id="popup__input-error_avatar" name="avatar" type="url" placeholder="Ссылка на аватар" required />
         <span className="popup__input-error popup__input-error_avatar-error" />
+
       </PopupWithForm>
 
       <ImagePopup
@@ -115,6 +120,8 @@ function App() {
         onButtonClose={closeAllPopups}
         onOverlayClose={closeAllPopupsByOverlay}
       />
+
+
 
     </div>
 

@@ -1,7 +1,7 @@
 function ImagePopup(props) {
     const card = props.card;
     return (
-        <div className={`popup popup_open-image ${card ? "popup_opened" : ""}`}>
+        <div className={`popup popup_open-image ${props.isOpen && 'popup_opened'}`} onMouseDown={props.onOverlayClose}>
             <div className="popup__image-container">
                 <img className="popup__image" src={card.link} alt={card.name} />
                 <p className="popup__image-text">{card.name}</p>
