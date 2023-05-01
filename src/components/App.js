@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -7,11 +7,11 @@ import ImagePopup from './ImagePopup';
 
 function App() {
 
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isPopupPictureOpen, setIsPopupPictureOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState([]);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isPopupPictureOpen, setIsPopupPictureOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -40,7 +40,7 @@ function App() {
   const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isPopupPictureOpen;
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     function closeAllPopupsByEscape(evt) {
       if (evt.key === 'Escape') {
         closeAllPopups();
@@ -58,6 +58,8 @@ function App() {
     }
   };
 
+
+
   return (
 
     <div className="root">
@@ -71,11 +73,11 @@ function App() {
       <Footer />
       <PopupWithForm
         name={'profile'}
-        title={'Редактировать профиль'}
+        title="Редактировать профиль"
         isOpen={isEditProfilePopupOpen}
         onButtonClose={closeAllPopups}
         onOverlayClose={closeAllPopupsByOverlay}
-        buttonText={'Сохранить'}
+        buttonText="Сохранить"
       >
         <input type="text" className="popup__input popup__input_profile_title" id="profile-title-input" name="name" placeholder="Введите Имя" minLength={2} maxLength={40} required />
 
@@ -88,11 +90,11 @@ function App() {
 
       <PopupWithForm
         name={'add-element'}
-        title={'Новое место'}
+        title="Новое место"
         isOpen={isAddPlacePopupOpen}
         onButtonClose={closeAllPopups}
         onOverlayClose={closeAllPopupsByOverlay}
-        buttonText={'Создать'}
+        buttonText="Создать"
       >
         <input type="text" className="popup__input popup__input_element-title" id="element-title-input" name="name" placeholder="Название" minLength={2} maxLength={30} required />
         <span className="popup__input-error element-title-input-error" />
@@ -103,11 +105,11 @@ function App() {
 
       <PopupWithForm
         name={'edit-avatar'}
-        title={'Обновить аватар'}
+        title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
         onButtonClose={closeAllPopups}
         onOverlayClose={closeAllPopupsByOverlay}
-        buttonText={'Сохранить'}
+        buttonText="Cохранить"
       >
         <input className="popup__input popup__input_avatar" id="popup__input-error_avatar" name="avatar" type="url" placeholder="Ссылка на аватар" required />
         <span className="popup__input-error popup__input-error_avatar-error" />
