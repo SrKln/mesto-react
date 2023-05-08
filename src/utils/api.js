@@ -23,19 +23,19 @@ class Api {
         }).then(this._getJson);
     }
 
-    setUserInfo(data) {
+    setUserInfo(name, about) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
             headers: this._headers,
-            body: JSON.stringify({ name: data.name, about: data.about }),
+            body: JSON.stringify({ name: name, about: about }),
         }).then(this._getJson);
     }
 
-    addCard(data) {
+    addCard(name, link) {
         return fetch(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: this._headers,
-            body: JSON.stringify({ name: data.name, link: data.link }),
+            body: JSON.stringify({ name: name, link: link }),
         }).then(this._getJson);
     }
 
@@ -47,18 +47,14 @@ class Api {
         }).then(this._getJson);
     }
 
-    deleteLike(id) {
-        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-            method: "DELETE",
-            headers: this._headers,
-        }).then(this._getJson);
-    }
+    changeLikeCardStatus(cardId, isLiked) {
+        let method = isLiked ? 'PUT' : 'DELETE';
 
-    setLike(id) {
-        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-            method: "PUT",
-            headers: this._headers,
-        }).then(this._getJson);
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            method: method,
+            headers: this._headers
+        })
+            .then(this._getJson);
     }
 
     deleteCard(id) {
@@ -70,12 +66,11 @@ class Api {
 }
 
 
-const api = new Api({
+export const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-61",
     headers: {
         authorization: "24747cee-051c-47bf-ba30-2cb89fe40c27",
         "Content-Type": "application/json",
-    },
+    }
 });
 
-export default api;

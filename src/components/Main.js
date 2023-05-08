@@ -1,48 +1,34 @@
-import { useState, useEffect } from 'react';
+import { memo, useContext } from 'react';
 import Card from './Card.js';
-import api from '../utils/api.js'
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main(props) {
-
-    const [userName, setUserName] = useState('');
-    const [userSubtitle, setUserSubtitle] = useState('');
-    const [userAvatar, setUserAvatar] = useState('');
-    const [cards, setCards] = useState([]);
-
-    useEffect(() => {
-        api.getUserInfo()
-            .then(res => {
-                setUserName(res.name);
-                setUserSubtitle(res.about);
-                setUserAvatar(res.avatar);
-            })
-            .then(() => {
-                api.getInitialCards()
-                    .then(res => setCards(res))
-            })
-            .catch(err => console.log(err));
-    }, []);
-
-
+const Main = memo((props) => {
+    const currentUser = useContext(CurrentUserContext);
 
     return (
         <main className="content">
             <section className="profile">
-                <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }} onClick={props.onEditAvatar} />
+                <div className="profile__avatar" style={{ backgroundImage: `url(${currentUser.avatar})` }} onClick={props.onEditAvatar} />
                 <div className="profile__info">
-                    <h1 className="profile__title">{userName}</h1>
+                    <h1 className="profile__title">{currentUser.name}</h1>
                     <button type="button" className="profile__edit-button" name="button" onClick={props.onEditProfile} />
-                    <p className="profile__subtitle">{userSubtitle}</p>
+                    <p className="profile__subtitle">{currentUser.about}</p>
                 </div>
                 <button type="button" name="button" className="profile__add-button" onClick={props.onAddPlace} />
             </section>
             <section className="elements" aria-label="Блок с карточками">
-                <ul className="elements__grid" >   {cards.map((card) =>
-                    <Card onImageCardClick={props.onCardClick} key={card._id} card={card} />
-                )}</ul>
+                <ul className="elements__grid" >   {props.cards.map((card) => (
+                    <Card
+                        key={card._id}
+                        card={card}
+                        onCardClick={props.onCardClick}
+                        onCardLike={props.onCardLike}
+                        onCardDelete={props.onCardDelete}
+                    />
+                ))}</ul>
             </section>
         </main>
     );
-}
+});
 
 export default Main;
