@@ -21,7 +21,15 @@ const EditAvatarPopup = memo(({ isOpen, onClose, onUpdateAvatar, onOverlayClose 
             buttonText="Cохранить"
             onSubmit={handleSubmit}
         >
-            <input ref={avatarRef} className="popup__input popup__input_avatar" id="popup__input-error_avatar" name="avatar" type="url" placeholder="Ссылка на аватар" required />
+            <input
+                ref={avatarRef}
+                className="popup__input popup__input_avatar"
+                id="popup__input-error_avatar"
+                name="avatar"
+                type="url"
+                placeholder="Ссылка на аватар"
+                required
+            />
             <span className="popup__input-error popup__input-error_avatar-error" />
 
         </PopupWithForm>

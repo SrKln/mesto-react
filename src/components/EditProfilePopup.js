@@ -38,9 +38,30 @@ const EditProfilePopup = memo(({ isOpen, onClose, onUpdateUser, onOverlayClose }
             onSubmit={handleSubmit}
             onOverlayClose={onOverlayClose}
         >
-            <input value={name || ''} onChange={handleNameChange} type="text" className="popup__input popup__input_profile_title" id="profile-title-input" name="name" placeholder="Введите Имя" minLength={2} maxLength={40} required />
+            <input
+                value={name || ''}
+                onChange={handleNameChange}
+                type="text"
+                className="popup__input popup__input_profile_title"
+                id="profile-title-input"
+                name="name"
+                placeholder="Введите Имя"
+                minLength={2}
+                maxLength={40}
+                required
+            />
             <span className="popup__input-error profile-title-input-error" />
-            <input value={description || ''} onChange={handleDescriptionChange} type="text" className="popup__input popup__input_profile_subtitle" id="profile-subtitle-input" name="about" placeholder="Добавьте пояснение" minLength={2} maxLength={200} required />
+            <input value={description || ''}
+                onChange={handleDescriptionChange}
+                type="text"
+                className="popup__input popup__input_profile_subtitle"
+                id="profile-subtitle-input"
+                name="about"
+                placeholder="Добавьте пояснение"
+                minLength={2}
+                maxLength={200}
+                required
+            />
             <span className="popup__input-error profile-subtitle-input-error" />
 
         </PopupWithForm>

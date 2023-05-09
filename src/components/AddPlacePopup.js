@@ -32,9 +32,27 @@ const AddPlacePopup = React.memo(({ isOpen, onClose, onAddPlace, onOverlayClose 
             onClose={onClose}
             onSubmit={handleSubmit}
         >
-            <input onChange={handleNameChange} type="text" className="popup__input popup__input_element-title" id="element-title-input" name="name" placeholder="Название" minLength={2} maxLength={30} required />
+            <input
+                onChange={handleNameChange}
+                type="text"
+                className="popup__input popup__input_element-title"
+                id="element-title-input"
+                name="name"
+                placeholder="Название"
+                minLength={2}
+                maxLength={30}
+                required
+            />
             <span className="popup__input-error element-title-input-error" />
-            <input onChange={handleLinkChange} type="url" className="popup__input popup__input_element-image" id="element-image-input" name="link" placeholder="Ссылка на картинку" required />
+            <input
+                onChange={handleLinkChange}
+                type="url"
+                className="popup__input popup__input_element-image"
+                id="element-image-input"
+                name="link"
+                placeholder="Ссылка на картинку"
+                required
+            />
             <span className="popup__input-error element-image-input-error" />
 
 
